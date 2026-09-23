@@ -7,7 +7,7 @@ Vencord QuickCSS snippet: when you're muted, your mic icon becomes a muzzle and 
 Paste this at the very top of your QuickCSS:
 
 ```css
-@import url("https://USERNAME.github.io/MutedToMuzzled/MutedToMuzzled.css");
+@import url("https://moshikiwi.github.io/MutedToMuzzledVencordPort/MutedToMuzzled.css");
 ```
 
 ## Credits
