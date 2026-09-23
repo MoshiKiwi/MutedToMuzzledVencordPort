@@ -13,3 +13,4 @@ Paste this at the very top of your QuickCSS:
 ## Credits
 
 Based on the MutedToMuzzled BetterDiscord plugin by 1xzozz.
+Add me on discord: `Moshi__` if anything goes bad or post an issue on this repo
