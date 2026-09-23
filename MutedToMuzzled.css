@@ -1,0 +1,37 @@
+/**
+ * @name MutedToMuzzled
+ * @description Replaces the muted mic icon with a muzzle and renames the "Unmute" tooltip to "Muzzled". Language-proof.
+ * @credits Original BetterDiscord plugin by 1xzozz
+ */
+
+/* Hide the default muted mic icon */
+[class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *) > button[role="switch"][aria-checked="true"] [class*="lottieIcon_"] > svg {
+    display: none;
+}
+
+/* Replace it with the dog muzzle image */
+[class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *) > button[role="switch"][aria-checked="true"] [class*="lottieIcon_"]::after {
+    content: "";
+    display: block;
+    width: 21px;
+    height: 21px;
+    scale: 1.2;
+    background-image: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/dog.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+/* Swap the tooltip text for "Muzzled" */
+body:has([class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *) > button[role="switch"][aria-checked="true"]:hover)
+    [class*="tooltip_"] div[data-text-variant="text-sm/medium"] {
+    font-size: 0 !important;
+    line-height: 0 !important;
+}
+
+body:has([class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *) > button[role="switch"][aria-checked="true"]:hover)
+    [class*="tooltip_"] div[data-text-variant="text-sm/medium"]::after {
+    content: "Muzzled";
+    font-size: 14px;
+    line-height: 18px;
+}
