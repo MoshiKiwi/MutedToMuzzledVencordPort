@@ -19,7 +19,7 @@
     height: 21px;
     scale: 1.2;
 
-    background-image: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/dog.png");
+    background-image: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/muzzle.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -59,7 +59,7 @@ button[role="switch"][aria-checked="true"].redGlow__67645
     height: 21px;
     scale: 1.1;
 
-    background-image: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/cage.png");
+    background-image: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/closed.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -80,7 +80,7 @@ button[role="switch"][aria-checked="true"].redGlow__67645
     height: 21px;
     scale: 1.1;
 
-    background-image: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/cage2.png");
+    background-image: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/open.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -219,4 +219,5 @@ div[data-text-variant="text-sm/medium"]::after {
         font-size: 12px;
         content: "Lots of barking...";
     }
+  }
 }
