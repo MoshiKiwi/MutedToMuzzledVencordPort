@@ -1,68 +1,222 @@
 /**
- * @name MutedToMuzzled
- * @description Replaces the muted mic icon with a muzzle and renames the "Unmute" tooltip to "Muzzled". Language-proof. Also changes Deafened to Caged.
+ * @name PupCord
+ * @description Makes discord more puppy.
  * @credits Original BetterDiscord plugin by 1xzozz
  */
 
-/* Hide the default muted mic icon */
-[class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *) > button[role="switch"][aria-checked="true"] [class*="lottieIcon_"] > svg {
+[class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *)
+> button[role="switch"][aria-checked="true"]
+[class*="lottieIcon_"] > svg {
     display: none;
 }
 
-/* Replace it with the dog muzzle image */
-[class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *) > button[role="switch"][aria-checked="true"] [class*="lottieIcon_"]::after {
+[class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *)
+> button[role="switch"][aria-checked="true"]
+[class*="lottieIcon_"]::after {
     content: "";
     display: block;
     width: 21px;
     height: 21px;
     scale: 1.2;
+
     background-image: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/dog.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
 }
 
-/* Swap the tooltip text for "Muzzled" */
-body:has([class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *) > button[role="switch"][aria-checked="true"]:hover)
-    [class*="tooltip_"] div[data-text-variant="text-sm/medium"] {
-    font-size: 0 !important;
-    line-height: 0 !important;
-}
-
-body:has([class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *) > button[role="switch"][aria-checked="true"]:hover)
-    [class*="tooltip_"] div[data-text-variant="text-sm/medium"]::after {
-    content: "Muzzled";
-    font-size: 14px;
-    line-height: 18px;
-}
-
-button[role="switch"][aria-checked="true"].redGlow__67645 [class*="lottieIcon_"] > svg {
+[class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *)
+> button[role="switch"][aria-checked="false"]
+[class*="lottieIcon_"] > svg {
     display: none;
 }
 
-/* Cage icon bullshit */
-button[role="switch"][aria-checked="true"].redGlow__67645 [class*="lottieIcon_"]::after {
+[class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *)
+> button[role="switch"][aria-checked="false"]
+[class*="lottieIcon_"]::after {
+    content: "";
+    display: block;
+    width: 21px;
+    height: 21px;
+    scale: 1.2;
+
+    background-image: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/dog2.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+button[role="switch"][aria-checked="true"].redGlow__67645
+[class*="lottieIcon_"] > svg {
+    display: none;
+}
+
+button[role="switch"][aria-checked="true"].redGlow__67645
+[class*="lottieIcon_"]::after {
     content: "";
     display: block;
     width: 21px;
     height: 21px;
     scale: 1.1;
+
     background-image: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/cage.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
 }
 
-/* Caged */
-body:has(button[role="switch"][aria-checked="true"].redGlow__67645:hover)
-    [class*="tooltip_"] div[data-text-variant="text-sm/medium"] {
-    font-size: 0 !important;
-    line-height: 0 !important;
+.buttons__37e49 > .audioButtonParent__5e764:nth-child(2)
+> button[role="switch"][aria-checked="false"]
+[class*="lottieIcon_"] > svg {
+    display: none;
 }
 
-body:has(button[role="switch"][aria-checked="true"].redGlow__67645:hover)
-    [class*="tooltip_"] div[data-text-variant="text-sm/medium"]::after {
+.buttons__37e49 > .audioButtonParent__5e764:nth-child(2)
+> button[role="switch"][aria-checked="false"]
+[class*="lottieIcon_"]::after {
+    content: "";
+    display: block;
+    width: 21px;
+    height: 21px;
+    scale: 1.1;
+
+    background-image: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/cage2.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+[class*="tooltip_"]
+div[data-text-variant="text-sm/medium"] {
+    transition-property: font-size;
+    transition-duration: 0s;
+    transition-delay: 180ms;
+}
+
+body:has(
+    [class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *)
+    > button[role="switch"][aria-checked="true"]:hover
+)
+[class*="tooltip_"]
+div[data-text-variant="text-sm/medium"] {
+    font-size: 0 !important;
+    line-height: 18px !important;
+    transition-delay: 0s;
+}
+
+body:has(
+    [class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *)
+    > button[role="switch"][aria-checked="true"]:hover
+)
+[class*="tooltip_"]
+div[data-text-variant="text-sm/medium"]::after {
+    content: "Muzzled";
+    font-size: 14px;
+    line-height: 18px;
+    display: inline;
+}
+
+body:has(
+    button[role="switch"][aria-checked="true"].redGlow__67645:hover
+)
+[class*="tooltip_"]
+div[data-text-variant="text-sm/medium"] {
+    font-size: 0 !important;
+    line-height: 18px !important;
+
+    transition-delay: 0s;
+}
+
+body:has(
+    button[role="switch"][aria-checked="true"].redGlow__67645:hover
+)
+[class*="tooltip_"]
+div[data-text-variant="text-sm/medium"]::after {
     content: "Caged";
     font-size: 14px;
     line-height: 18px;
+    display: inline;
+}
+
+body:has(
+    [class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *)
+    > button[role="switch"][aria-checked="false"]:hover
+)
+[class*="tooltip_"]
+div[data-text-variant="text-sm/medium"] {
+    font-size: 0 !important;
+    line-height: 18px !important;
+
+    transition-delay: 0s;
+}
+
+body:has(
+    [class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *)
+    > button[role="switch"][aria-checked="false"]:hover
+)
+[class*="tooltip_"]
+div[data-text-variant="text-sm/medium"]::after {
+    content: "Muzzle";
+    font-size: 14px;
+    line-height: 18px;
+    display: inline;
+}
+
+body:has(
+    .buttons__37e49 > .audioButtonParent__5e764:nth-child(2)
+    > button[role="switch"][aria-checked="false"]:hover
+)
+[class*="tooltip_"]
+div[data-text-variant="text-sm/medium"] {
+    font-size: 0 !important;
+    line-height: 18px !important;
+
+    transition-delay: 0s;
+}
+
+body:has(
+    .buttons__37e49 > .audioButtonParent__5e764:nth-child(2)
+    > button[role="switch"][aria-checked="false"]:hover
+)
+[class*="tooltip_"]
+div[data-text-variant="text-sm/medium"]::after {
+    content: "Cage";
+    font-size: 14px;
+    line-height: 18px;
+    display: inline;
+}
+
+.typingDots_b88801 > .ellipsis_b88801 + .text_b88801 {
+    font-size: 0;
+    height: 16px;
+
+    > strong {
+        font-size: 12px;
+
+        &::after {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        &:last-child::after {
+            content: " is barking...";
+        }
+
+        &:last-child:not(:first-child)::after {
+            content: " are barking...";
+        }
+
+        &:nth-last-child(2)::after {
+            content: " and ";
+        }
+
+        &:nth-last-child(3)::after {
+            content: ", ";
+        }
+    }
+
+    &:not(:has(> strong))::after {
+        font-size: 12px;
+        content: "Lots of barking...";
+    }
 }
