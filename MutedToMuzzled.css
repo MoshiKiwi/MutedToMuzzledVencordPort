@@ -1,6 +1,6 @@
 /**
  * @name MutedToMuzzled
- * @description Replaces the muted mic icon with a muzzle and renames the "Unmute" tooltip to "Muzzled". Language-proof.
+ * @description Replaces the muted mic icon with a muzzle and renames the "Unmute" tooltip to "Muzzled". Language-proof. Also changes Deafened to Caged.
  * @credits Original BetterDiscord plugin by 1xzozz
  */
 
@@ -32,6 +32,37 @@ body:has([class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *) > 
 body:has([class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *) > button[role="switch"][aria-checked="true"]:hover)
     [class*="tooltip_"] div[data-text-variant="text-sm/medium"]::after {
     content: "Muzzled";
+    font-size: 14px;
+    line-height: 18px;
+}
+
+button[role="switch"][aria-checked="true"].redGlow__67645 [class*="lottieIcon_"] > svg {
+    display: none;
+}
+
+/* Cage icon bullshit */
+button[role="switch"][aria-checked="true"].redGlow__67645 [class*="lottieIcon_"]::after {
+    content: "";
+    display: block;
+    width: 21px;
+    height: 21px;
+    scale: 1.1;
+    background-image: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/cage.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+/* Caged */
+body:has(button[role="switch"][aria-checked="true"].redGlow__67645:hover)
+    [class*="tooltip_"] div[data-text-variant="text-sm/medium"] {
+    font-size: 0 !important;
+    line-height: 0 !important;
+}
+
+body:has(button[role="switch"][aria-checked="true"].redGlow__67645:hover)
+    [class*="tooltip_"] div[data-text-variant="text-sm/medium"]::after {
+    content: "Caged";
     font-size: 14px;
     line-height: 18px;
 }
