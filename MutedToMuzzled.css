@@ -4,220 +4,188 @@
  * @credits Original BetterDiscord plugin by 1xzozz
  */
 
-[class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *)
-> button[role="switch"][aria-checked="true"]
-[class*="lottieIcon_"] > svg {
-    display: none;
+[class*="audioButtonParent_"]:not(
+    [class*="audioButtonParent_"] ~ *
+) > button[role="switch"] {
+    [class*="lottieIcon_"] > svg {
+        display: none;
+    }
+
+    &[aria-checked="true"] {
+        [class*="lottieIcon_"]::after {
+            content: "";
+            display: block;
+            width: 21px;
+            height: 21px;
+            scale: 1.2;
+            background: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/muzzle.png")
+                center / contain no-repeat;
+        }
+    }
+
+    &[aria-checked="false"] {
+        [class*="lottieIcon_"]::after {
+            content: "";
+            display: block;
+            width: 21px;
+            height: 21px;
+            scale: 1.3;
+            background: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/bark.png")
+                center / contain no-repeat;
+        }
+    }
 }
 
-[class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *)
-> button[role="switch"][aria-checked="true"]
-[class*="lottieIcon_"]::after {
-    content: "";
-    display: block;
-    width: 21px;
-    height: 21px;
-    scale: 1.2;
+button[role="switch"].redGlow__67645 {
+    &[aria-checked="true"] {
+        [class*="lottieIcon_"] > svg {
+            display: none;
+        }
 
-    background-image: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/muzzle.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
+        [class*="lottieIcon_"]::after {
+            content: "";
+            display: block;
+            width: 21px;
+            height: 21px;
+            scale: 1.1;
+            background: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/closed.png")
+                center / contain no-repeat;
+        }
+    }
 }
 
-[class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *)
-> button[role="switch"][aria-checked="false"]
-[class*="lottieIcon_"] > svg {
-    display: none;
+.buttons__37e49
+> .audioButtonParent__5e764:nth-child(2)
+> button[role="switch"][aria-checked="false"] {
+    [class*="lottieIcon_"] > svg {
+        display: none;
+    }
+
+    [class*="lottieIcon_"]::after {
+        content: "";
+        display: block;
+        width: 21px;
+        height: 21px;
+        scale: 1.1;
+        background: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/open.png")
+            center / contain no-repeat;
+    }
 }
 
-[class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *)
-> button[role="switch"][aria-checked="false"]
-[class*="lottieIcon_"]::after {
-    content: "";
-    display: block;
-    width: 21px;
-    height: 21px;
-    scale: 1.3;
-
-    background-image: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/bark.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-}
-
-button[role="switch"][aria-checked="true"].redGlow__67645
-[class*="lottieIcon_"] > svg {
-    display: none;
-}
-
-button[role="switch"][aria-checked="true"].redGlow__67645
-[class*="lottieIcon_"]::after {
-    content: "";
-    display: block;
-    width: 21px;
-    height: 21px;
-    scale: 1.1;
-
-    background-image: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/closed.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-}
-
-.buttons__37e49 > .audioButtonParent__5e764:nth-child(2)
-> button[role="switch"][aria-checked="false"]
-[class*="lottieIcon_"] > svg {
-    display: none;
-}
-
-.buttons__37e49 > .audioButtonParent__5e764:nth-child(2)
-> button[role="switch"][aria-checked="false"]
-[class*="lottieIcon_"]::after {
-    content: "";
-    display: block;
-    width: 21px;
-    height: 21px;
-    scale: 1.1;
-
-    background-image: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/open.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-}
-
-[class*="tooltip_"]
-div[data-text-variant="text-sm/medium"] {
-    transition-property: font-size;
-    transition-duration: 0s;
-    transition-delay: 180ms;
+[class*="tooltip_"] {
+    div[data-text-variant="text-sm/medium"] {
+        transition: font-size 0s;
+        transition-delay: 180ms;
+    }
 }
 
 body:has(
-    [class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *)
-    > button[role="switch"][aria-checked="true"]:hover
-)
-[class*="tooltip_"]
-div[data-text-variant="text-sm/medium"] {
-    font-size: 0 !important;
-    line-height: 18px !important;
-    transition-delay: 0s;
-}
-
-body:has(
-    [class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *)
-    > button[role="switch"][aria-checked="true"]:hover
-)
-[class*="tooltip_"]
-div[data-text-variant="text-sm/medium"]::after {
-    content: "Muzzled";
-    font-size: 14px;
-    line-height: 18px;
-    display: inline;
-}
-
-body:has(
-    button[role="switch"][aria-checked="true"].redGlow__67645:hover
-)
-[class*="tooltip_"]
-div[data-text-variant="text-sm/medium"] {
-    font-size: 0 !important;
-    line-height: 18px !important;
-
-    transition-delay: 0s;
-}
-
-body:has(
-    button[role="switch"][aria-checked="true"].redGlow__67645:hover
-)
-[class*="tooltip_"]
-div[data-text-variant="text-sm/medium"]::after {
-    content: "Caged";
-    font-size: 14px;
-    line-height: 18px;
-    display: inline;
-}
-
-body:has(
-    [class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *)
-    > button[role="switch"][aria-checked="false"]:hover
-)
-[class*="tooltip_"]
-div[data-text-variant="text-sm/medium"] {
-    font-size: 0 !important;
-    line-height: 18px !important;
-
-    transition-delay: 0s;
-}
-
-body:has(
-    [class*="audioButtonParent_"]:not([class*="audioButtonParent_"] ~ *)
-    > button[role="switch"][aria-checked="false"]:hover
-)
-[class*="tooltip_"]
-div[data-text-variant="text-sm/medium"]::after {
-    content: "Muzzle";
-    font-size: 14px;
-    line-height: 18px;
-    display: inline;
-}
-
-body:has(
-    .buttons__37e49 > .audioButtonParent__5e764:nth-child(2)
-    > button[role="switch"][aria-checked="false"]:hover
-)
-[class*="tooltip_"]
-div[data-text-variant="text-sm/medium"] {
-    font-size: 0 !important;
-    line-height: 18px !important;
-
-    transition-delay: 0s;
-}
-
-body:has(
-    .buttons__37e49 > .audioButtonParent__5e764:nth-child(2)
-    > button[role="switch"][aria-checked="false"]:hover
-)
-[class*="tooltip_"]
-div[data-text-variant="text-sm/medium"]::after {
-    content: "Cage";
-    font-size: 14px;
-    line-height: 18px;
-    display: inline;
-}
-
-.typingDots_b88801 > .ellipsis_b88801 + .text_b88801 {
-    font-size: 0;
-    height: 16px;
-
-    > strong {
-        font-size: 12px;
+    [class*="audioButtonParent_"]:not(
+        [class*="audioButtonParent_"] ~ *
+    ) > button[role="switch"][aria-checked="true"]:hover
+) {
+    [class*="tooltip_"] div[data-text-variant="text-sm/medium"] {
+        font-size: 0 !important;
+        line-height: 18px !important;
+        transition-delay: 0s;
 
         &::after {
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        &:last-child::after {
-            content: " is barking...";
-        }
-
-        &:last-child:not(:first-child)::after {
-            content: " are barking...";
-        }
-
-        &:nth-last-child(2)::after {
-            content: " and ";
-        }
-
-        &:nth-last-child(3)::after {
-            content: ", ";
+            content: "Muzzled";
+            display: inline;
+            font-size: 14px;
+            line-height: 18px;
         }
     }
+}
 
-    &:not(:has(> strong))::after {
-        font-size: 12px;
-        content: "Lots of barking...";
+body:has(
+    button[role="switch"][aria-checked="true"].redGlow__67645:hover
+) {
+    [class*="tooltip_"] div[data-text-variant="text-sm/medium"] {
+        font-size: 0 !important;
+        line-height: 18px !important;
+        transition-delay: 0s;
+
+        &::after {
+            content: "Caged";
+            display: inline;
+            font-size: 14px;
+            line-height: 18px;
+        }
     }
-  }
+}
+
+body:has(
+    [class*="audioButtonParent_"]:not(
+        [class*="audioButtonParent_"] ~ *
+    ) > button[role="switch"][aria-checked="false"]:hover
+) {
+    [class*="tooltip_"] div[data-text-variant="text-sm/medium"] {
+        font-size: 0 !important;
+        line-height: 18px !important;
+        transition-delay: 0s;
+
+        &::after {
+            content: "Bark!!";
+            display: inline;
+            font-size: 14px;
+            line-height: 18px;
+        }
+    }
+}
+
+body:has(
+    .buttons__37e49
+    > .audioButtonParent__5e764:nth-child(2)
+    > button[role="switch"][aria-checked="false"]:hover
+) {
+    [class*="tooltip_"] div[data-text-variant="text-sm/medium"] {
+        font-size: 0 !important;
+        line-height: 18px !important;
+        transition-delay: 0s;
+
+        &::after {
+            content: "Cage";
+            display: inline;
+            font-size: 14px;
+            line-height: 18px;
+        }
+    }
+}
+
+.typingDots_b88801 {
+    > .ellipsis_b88801 + .text_b88801 {
+        font-size: 0;
+        height: 16px;
+
+        > strong {
+            font-size: 12px;
+
+            &::after {
+                color: var(--text-secondary);
+                font-weight: 500;
+            }
+
+            &:last-child::after {
+                content: " is barking...";
+            }
+
+            &:last-child:not(:first-child)::after {
+                content: " are barking...";
+            }
+
+            &:nth-last-child(2)::after {
+                content: " and ";
+            }
+
+            &:nth-last-child(3)::after {
+                content: ", ";
+            }
+        }
+
+        &:not(:has(> strong))::after {
+            content: "Lots of barking...";
+            font-size: 12px;
+        }
+    }
 }
