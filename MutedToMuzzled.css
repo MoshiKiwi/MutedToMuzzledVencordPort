@@ -41,7 +41,6 @@ button[role="switch"].redGlow__67645 {
         [class*="lottieIcon_"] > svg {
             display: none;
         }
-
         [class*="lottieIcon_"]::after {
             content: "";
             display: block;
@@ -60,7 +59,6 @@ button[role="switch"].redGlow__67645 {
     [class*="lottieIcon_"] > svg {
         display: none;
     }
-
     [class*="lottieIcon_"]::after {
         content: "";
         display: block;
@@ -88,7 +86,6 @@ body:has(
         font-size: 0 !important;
         line-height: 18px !important;
         transition-delay: 0s;
-
         &::after {
             content: "Muzzled";
             display: inline;
@@ -105,7 +102,6 @@ body:has(
         font-size: 0 !important;
         line-height: 18px !important;
         transition-delay: 0s;
-
         &::after {
             content: "Caged";
             display: inline;
@@ -124,7 +120,6 @@ body:has(
         font-size: 0 !important;
         line-height: 18px !important;
         transition-delay: 0s;
-
         &::after {
             content: "Bark!!";
             display: inline;
@@ -143,9 +138,68 @@ body:has(
         font-size: 0 !important;
         line-height: 18px !important;
         transition-delay: 0s;
-
         &::after {
             content: "Cage";
+            display: inline;
+            font-size: 14px;
+            line-height: 18px;
+        }
+    }
+}
+
+.iconGroup__07f91
+> svg.icon__07f91:first-of-type {
+    width: 20px;
+    height: 20px;
+    background: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/muzzle.png")
+        center / contain no-repeat;
+}
+
+.iconGroup__07f91
+> svg.icon__07f91:first-of-type > path {
+    display: none;
+}
+
+.iconGroup__07f91
+> svg.icon__07f91:nth-of-type(2) {
+    width: 19px;
+    height: 19px;
+    background: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/closed.png")
+        center / contain no-repeat;
+}
+
+.iconGroup__07f91
+> svg.icon__07f91:nth-of-type(2) > path {
+    display: none;
+}
+[class*="tooltip_"] {
+    div[data-text-variant="text-sm/medium"] {
+        transition: font-size 0s;
+        transition-delay: 180ms;
+    }
+}
+
+body:has(.iconGroup__07f91 > svg.icon__07f91:first-of-type:hover) {
+    [class*="tooltip_"] div[data-text-variant="text-sm/medium"] {
+        font-size: 0 !important;
+        line-height: 18px !important;
+        transition-delay: 0s;
+        &::after {
+            content: "Muzzled";
+            display: inline;
+            font-size: 14px;
+            line-height: 18px;
+        }
+    }
+}
+
+body:has(.iconGroup__07f91 > svg.icon__07f91:nth-of-type(2):hover) {
+    [class*="tooltip_"] div[data-text-variant="text-sm/medium"] {
+        font-size: 0 !important;
+        line-height: 18px !important;
+        transition-delay: 0s;
+        &::after {
+            content: "Caged";
             display: inline;
             font-size: 14px;
             line-height: 18px;
