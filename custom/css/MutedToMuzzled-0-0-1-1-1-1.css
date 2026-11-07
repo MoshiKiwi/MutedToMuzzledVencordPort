@@ -1,0 +1,38 @@
+/**
+ * @name PupCord
+ * @description Makes discord more puppy.
+ * @credits Original BetterDiscord plugin by 1xzozz
+ */
+
+[class*="audioButtonParent_"]:not(
+    [class*="audioButtonParent_"] ~ *
+) > button[role="switch"] {
+    [class*="lottieIcon_"] > svg {
+        display: none;
+    }
+
+    &[aria-checked="true"] {
+        [class*="lottieIcon_"]::after {
+            content: "";
+            display: block;
+            width: 21px;
+            height: 21px;
+            scale: 1.3;
+            background: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/nobark.png")
+                center / contain no-repeat;
+        }
+    }
+
+    &[aria-checked="false"] {
+        [class*="lottieIcon_"]::after {
+            content: "";
+            display: block;
+            width: 21px;
+            height: 21px;
+            scale: 1.3;
+            background: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/barkbark.png")
+                center / contain no-repeat;
+        }
+    }
+}
+

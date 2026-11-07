@@ -1,0 +1,99 @@
+/**
+ * @name PupCord
+ * @description Makes discord more puppy.
+ * @credits Original BetterDiscord plugin by 1xzozz
+ */
+
+[class*="audioButtonParent_"]:not(
+    [class*="audioButtonParent_"] ~ *
+) > button[role="switch"] {
+    [class*="lottieIcon_"] > svg {
+        display: none;
+    }
+
+    &[aria-checked="true"] {
+        [class*="lottieIcon_"]::after {
+            content: "";
+            display: block;
+            width: 21px;
+            height: 21px;
+            scale: 1.3;
+            background: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/nobark.png")
+                center / contain no-repeat;
+        }
+    }
+
+    &[aria-checked="false"] {
+        [class*="lottieIcon_"]::after {
+            content: "";
+            display: block;
+            width: 21px;
+            height: 21px;
+            scale: 1.3;
+            background: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/barkbark.png")
+                center / contain no-repeat;
+        }
+    }
+}
+
+button[role="switch"].redGlow__67645 {
+    &[aria-checked="true"] {
+        [class*="lottieIcon_"] > svg {
+            display: none;
+        }
+        [class*="lottieIcon_"]::after {
+            content: "";
+            display: block;
+            width: 21px;
+            height: 21px;
+            scale: 1.1;
+            background: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/caged.png")
+                center / contain no-repeat;
+        }
+    }
+}
+
+.buttons__37e49
+> .audioButtonParent__5e764:nth-child(2)
+> button[role="switch"][aria-checked="false"] {
+    [class*="lottieIcon_"] > svg {
+        display: none;
+    }
+    [class*="lottieIcon_"]::after {
+        content: "";
+        display: block;
+        width: 21px;
+        height: 21px;
+        scale: 1.1;
+        background: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/open_cage.png")
+            center / contain no-repeat;
+    }
+}
+
+.f75fb00fb7356cbe-chat .b8880176888cc928-typingDots > .b8880176888cc928-ellipsis+.b8880176888cc928-text {
+  font-size: 0;
+  height: 16px;
+  >strong {
+    font-size: 12px;
+    &::after {
+      color: var(--text-subtle);
+      font-weight: 500;
+    }
+    &:last-child::after {
+      content: " is barking!!!";
+    }
+    &:last-child:not(:first-child)::after {
+      content: " are barking!!!";
+    }
+    &:nth-last-child(2)::after {
+      content: " and "
+    }
+    &:nth-last-child(3)::after {
+      content: ", ";
+    }
+  }
+  &:not(:has(>strong))::after {
+    font-size: 12px;
+    content: "Lots of barking...";
+  }
+}

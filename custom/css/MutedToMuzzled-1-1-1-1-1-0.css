@@ -1,0 +1,33 @@
+/**
+ * @name PupCord
+ * @description Makes discord more puppy.
+ * @credits Original BetterDiscord plugin by 1xzozz
+ */
+
+.f75fb00fb7356cbe-chat .b8880176888cc928-typingDots > .b8880176888cc928-ellipsis+.b8880176888cc928-text {
+  font-size: 0;
+  height: 16px;
+  >strong {
+    font-size: 12px;
+    &::after {
+      color: var(--text-subtle);
+      font-weight: 500;
+    }
+    &:last-child::after {
+      content: " is barking!!!";
+    }
+    &:last-child:not(:first-child)::after {
+      content: " are barking!!!";
+    }
+    &:nth-last-child(2)::after {
+      content: " and "
+    }
+    &:nth-last-child(3)::after {
+      content: ", ";
+    }
+  }
+  &:not(:has(>strong))::after {
+    font-size: 12px;
+    content: "Lots of barking...";
+  }
+}

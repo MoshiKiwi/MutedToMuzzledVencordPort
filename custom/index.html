@@ -1,0 +1,817 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MutedToMuzzled — Customizer</title>
+<style>
+  :root {
+    --bg: #1e1f22;
+    --panel: #2b2d31;
+    --panel-alt: #313338;
+    --border: #3f4147;
+    --text: #dbdee1;
+    --text-muted: #949ba4;
+    --accent: #5865f2;
+    --code-bg: #111214;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "gg sans", "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+  }
+  h1 {
+    font-size: 1.6rem;
+    margin-bottom: 4px;
+  }
+  p.lede {
+    color: var(--text-muted);
+    margin-top: 0;
+    margin-bottom: 28px;
+  }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+  }
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 560px) {
+    .options-grid { grid-template-columns: 1fr; }
+  }
+  .option {
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    background: var(--panel-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .option-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .option input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    margin-top: 1px;
+    border-radius: 6px;
+    border: 2px solid var(--border);
+    background: var(--panel);
+    flex-shrink: 0;
+    position: relative;
+    cursor: pointer;
+    transition: background-color .15s ease, border-color .15s ease;
+  }
+  .option input[type="checkbox"]:hover {
+    border-color: var(--accent);
+  }
+  .option input[type="checkbox"]:checked {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .option input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 9px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  .option input[type="checkbox"]:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(88, 101, 242, .35);
+  }
+  .option label {
+    cursor: pointer;
+  }
+  .option .title {
+    font-weight: 600;
+    display: block;
+  }
+  .option .desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+  .option-body {
+    flex: 1;
+  }
+  .style-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+  }
+  .style-row-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--text-muted);
+  }
+  select.style-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: var(--panel);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23949ba4' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 10px 6px;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 30px 6px 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  select.style-select:hover:not(:disabled) {
+    border-color: var(--accent);
+  }
+  select.style-select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(88, 101, 242, .35);
+  }
+  select.style-select:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    color: var(--text-muted);
+    margin: 0 0 12px;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px;
+    overflow-x: auto;
+    font-size: 0.82rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .snippet-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .snippet-header h2 {
+    margin: 0;
+  }
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 14px 6px 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .copy-btn:hover {
+    border-color: var(--accent);
+    color: #fff;
+    background: var(--accent);
+  }
+  .copy-btn svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+  .copy-btn.copied {
+    background: #23a55a;
+    border-color: #23a55a;
+    color: #fff;
+  }
+  footer {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    text-align: center;
+    margin-top: 30px;
+  }
+  code.inline {
+    background: var(--panel-alt);
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 0.85em;
+  }
+
+  /* --- Discord mock preview (cosmetic shell only; icon art + tooltip/typing
+     text come from the real imported stylesheet via #preview-style) --- */
+  .card.preview-card {
+    padding: 18px 20px 16px;
+  }
+  .discord-mock {
+    background: #313338;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.04);
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mock-chat {
+    padding: 16px 16px 10px;
+    min-height: 56px;
+  }
+  .mock-message {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 4px;
+  }
+  .mock-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #5865f2, #eb459e);
+    flex-shrink: 0;
+    position: relative;
+  }
+  .mock-message .body {
+    min-width: 0;
+    padding-top: 1px;
+  }
+  .mock-message .body .author {
+    color: #f2f3f5;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-right: 7px;
+  }
+  .mock-message .body .time {
+    color: var(--text-muted);
+    font-size: 0.68rem;
+  }
+  .mock-message .body .text {
+    color: #dbdee1;
+    line-height: 1.4;
+  }
+  .typing-row {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    padding: 6px 0 10px 50px;
+  }
+  .b8880176888cc928-ellipsis {
+    display: inline-flex;
+    gap: 3px;
+    flex-shrink: 0;
+  }
+  .b8880176888cc928-text {
+    padding-left: 8px;
+  }
+  .b8880176888cc928-ellipsis span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    animation: bounce 1.3s infinite ease-in-out;
+  }
+  .b8880176888cc928-ellipsis span:nth-child(2) { animation-delay: .16s; }
+  .b8880176888cc928-ellipsis span:nth-child(3) { animation-delay: .32s; }
+  @keyframes bounce {
+    0%, 80%, 100% { transform: translateY(0); opacity: .45; }
+    40% { transform: translateY(-3px); opacity: 1; }
+  }
+  .mock-voice-panel {
+    background: #232428;
+    border-top: 1px solid rgba(0,0,0,.3);
+    box-shadow: 0 -1px 0 rgba(255,255,255,.02);
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 0 0 8px 8px;
+  }
+  .mock-user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+  }
+  .mock-user .mock-avatar { width: 32px; height: 32px; }
+  .mock-user .mock-avatar::after {
+    content: "";
+    position: absolute;
+    right: -2px;
+    bottom: -2px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #23a55a;
+    border: 3px solid #232428;
+    box-sizing: border-box;
+  }
+  .mock-user .names {
+    min-width: 0;
+    line-height: 1.25;
+  }
+  .mock-user .name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #f2f3f5;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mock-user .status {
+    font-size: 0.72rem;
+    color: #23a55a;
+  }
+  .state-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .state-sep {
+    width: 1px;
+    height: 20px;
+    background: rgba(255,255,255,.12);
+  }
+  .buttons__37e49 {
+    display: flex;
+    gap: 4px;
+  }
+  .btn-wrap {
+    position: relative;
+    display: inline-flex;
+  }
+  .discord-btn {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: #b5bac1;
+    cursor: default;
+    padding: 0;
+    transition: color .12s ease;
+  }
+  .discord-btn:hover { background: #3a3c42; color: #dbdee1; }
+  .discord-btn[aria-checked="true"] {
+    color: #da373c;
+  }
+  .discord-btn[aria-checked="true"]:hover {
+    background: #3a3c42;
+    color: #ed4245;
+  }
+  .tooltip__wxyz989 {
+    position: absolute;
+    bottom: calc(100% + 11px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #111214;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .1s ease;
+    pointer-events: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,.4);
+    z-index: 10;
+  }
+  .tooltip__wxyz989::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #111214;
+  }
+  .btn-wrap:hover .tooltip__wxyz989 {
+    opacity: 1;
+    visibility: visible;
+  }
+  .preview-hint {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin: 10px 0 0;
+  }
+</style>
+<style id="preview-style"></style>
+</head>
+<body>
+<main>
+  <h1>MutedToMuzzled \ Customizer</h1>
+  <p class="lede">Pick which parts of the theme you want, hit "copy", and paste in any Discord Client that allows custom CSS.</p>
+
+  <div class="card" id="options">
+    <h2>Features</h2>
+
+    <div class="options-grid">
+    <div class="option">
+      <div class="option-top">
+        <input type="checkbox" id="icon-mute" checked>
+        <div class="option-body">
+          <label for="icon-mute">
+            <span class="title">Mic icon swap</span>
+            <span class="desc">Muzzled!</span>
+          </label>
+        </div>
+      </div>
+      <div class="style-row">
+        <span class="style-row-label">Icon style</span>
+        <select id="icon-mute-style" class="style-select">
+          <option value="new" selected>New</option>
+          <option value="old">Old</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="option">
+      <div class="option-top">
+        <input type="checkbox" id="icon-deafen" checked>
+        <div class="option-body">
+          <label for="icon-deafen">
+            <span class="title">Deafen icon swap</span>
+            <span class="desc">A kennel for you.</span>
+          </label>
+        </div>
+      </div>
+      <div class="style-row">
+        <span class="style-row-label">Icon style</span>
+        <select id="icon-deafen-style" class="style-select">
+          <option value="new" selected>New</option>
+          <option value="old">Old</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="option">
+      <div class="option-top">
+        <input type="checkbox" id="tooltip-text" checked>
+        <label for="tooltip-text">
+          <span class="title">Custom tooltip text</span>
+          <span class="desc">Replaces the useless text into proper oupy stuff.</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="option">
+      <div class="option-top">
+        <input type="checkbox" id="typing-text" checked>
+        <label for="typing-text">
+          <span class="title">Typing indicator text</span>
+          <span class="desc">For the true yappers, barkers and biters.</span>
+        </label>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <div class="card preview-card">
+    <h2>Live preview</h2>
+    <div class="discord-mock">
+      <div class="mock-chat">
+        <div class="mock-message">
+          <div class="mock-avatar"></div>
+          <div class="body">
+            <div><span class="author">Moshi</span><span class="time">Today at 9:41 PM</span></div>
+            <div class="text">anyone free later?</div>
+          </div>
+        </div>
+        <div class="f75fb00fb7356cbe-chat">
+          <div class="typing-row">
+            <span class="b8880176888cc928-typingDots">
+              <span class="b8880176888cc928-ellipsis"><span></span><span></span><span></span></span><span class="b8880176888cc928-text"><strong>Zoz</strong> is typing...</span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="mock-voice-panel">
+        <div class="mock-user">
+          <div class="mock-avatar"></div>
+          <div class="names">
+            <div class="name">Moshi</div>
+            <div class="status">Voice Connected</div>
+          </div>
+        </div>
+        <div class="state-line">
+          <div class="buttons__37e49">
+            <div class="audioButtonParent__1a2b3c btn-wrap">
+              <button type="button" role="switch" aria-checked="false" aria-label="Mute" class="discord-btn">
+                <div class="lottieIcon__abc123">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/>
+                  </svg>
+                </div>
+              </button>
+              <div class="tooltip__wxyz989"><div data-text-variant="text-sm/medium">Mute</div></div>
+            </div>
+            <div class="audioButtonParent__5e764 btn-wrap">
+              <button type="button" role="switch" aria-checked="false" aria-label="Deafen" class="discord-btn">
+                <div class="lottieIcon__def456">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+                  </svg>
+                </div>
+              </button>
+              <div class="tooltip__wxyz989"><div data-text-variant="text-sm/medium">Deafen</div></div>
+            </div>
+          </div>
+          <div class="state-sep"></div>
+          <div class="audioButtonParent__s1 btn-wrap">
+            <button type="button" role="switch" aria-checked="true" aria-label="Unmute" class="discord-btn">
+              <div class="lottieIcon__ghi789">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="1" y1="1" x2="23" y2="23"/><path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"/><path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/>
+                </svg>
+              </div>
+            </button>
+            <div class="tooltip__wxyz989"><div data-text-variant="text-sm/medium">Unmute</div></div>
+          </div>
+          <div class="btn-wrap">
+            <button type="button" role="switch" aria-checked="true" aria-label="Undeafen" class="discord-btn redGlow__67645">
+              <div class="lottieIcon__jkl012">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+                </svg>
+              </div>
+            </button>
+            <div class="tooltip__wxyz989"><div data-text-variant="text-sm/medium">Undeafen</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="snippet-header">
+      <h2>Your CSS snippet</h2>
+      <button id="copy-btn" class="copy-btn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+        </svg>
+        <span id="copy-btn-label">Copy</span>
+      </button>
+    </div>
+    <pre><code id="output"></code></pre>
+    <p class="desc" style="color: var(--text-muted); font-size: 0.85rem;">
+      Paste this at the top of your Custom CSS Loader (Vencord → Settings → QuickCSS, for example). The default stylesheet is always loaded and auto updates via
+      <code class="inline">@import</code>
+    </p>
+  </div>
+
+  <footer>Based on the MutedToMuzzled BetterDiscord plugin and maintained by 1xzozz, put online and made easy by 'Moshi.</footer>
+</main>
+
+<script>
+const IMPORT_URL = "https://moshikiwi.github.io/MutedToMuzzledVencordPort/MutedToMuzzled.css";
+
+const features = {
+  "icon-mute": {
+    disable: `/* Mic icon swap: off */
+[class*="audioButtonParent_"]:not(
+    [class*="audioButtonParent_"] ~ *
+) > button[role="switch"] {
+    [class*="lottieIcon_"] > svg {
+        display: revert !important;
+    }
+    &[aria-checked="true"] [class*="lottieIcon_"]::after,
+    &[aria-checked="false"] [class*="lottieIcon_"]::after {
+        content: none !important;
+        display: none !important;
+    }
+}`,
+    variants: {
+      old: `/* Mic icon swap: old art style */
+[class*="audioButtonParent_"]:not(
+    [class*="audioButtonParent_"] ~ *
+) > button[role="switch"] {
+    &[aria-checked="true"] [class*="lottieIcon_"]::after {
+        background: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/muzzle.png")
+            center / contain no-repeat;
+    }
+    &[aria-checked="false"] [class*="lottieIcon_"]::after {
+        background: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/bark.png")
+            center / contain no-repeat;
+    }
+}`
+    }
+  },
+
+  "icon-deafen": {
+    disable: `/* Deafen icon swap: off */
+button[role="switch"].redGlow__67645[aria-checked="true"] {
+    [class*="lottieIcon_"] > svg {
+        display: revert !important;
+    }
+    [class*="lottieIcon_"]::after {
+        content: none !important;
+        display: none !important;
+    }
+}
+
+.buttons__37e49 > .audioButtonParent__5e764:nth-child(2) > button[role="switch"][aria-checked="false"] {
+    [class*="lottieIcon_"] > svg {
+        display: revert !important;
+    }
+    [class*="lottieIcon_"]::after {
+        content: none !important;
+        display: none !important;
+    }
+}`,
+    variants: {
+      old: `/* Deafen icon swap: old art style */
+button[role="switch"].redGlow__67645[aria-checked="true"] [class*="lottieIcon_"]::after {
+    background: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/closed.png")
+        center / contain no-repeat;
+}
+
+.buttons__37e49 > .audioButtonParent__5e764:nth-child(2) > button[role="switch"][aria-checked="false"] [class*="lottieIcon_"]::after {
+    background: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/open.png")
+        center / contain no-repeat;
+}`
+    }
+  },
+
+  "tooltip-text": {
+    disable: `/* Custom tooltip text: off */
+[class*="tooltip_"] div[data-text-variant="text-sm/medium"] {
+    transition: revert !important;
+}
+
+body:has(
+    [class*="audioButtonParent_"]:not(
+        [class*="audioButtonParent_"] ~ *
+    ) > button[role="switch"][aria-checked="true"]:hover
+) [class*="tooltip_"] div[data-text-variant="text-sm/medium"],
+body:has(
+    [class*="audioButtonParent_"]:not(
+        [class*="audioButtonParent_"] ~ *
+    ) > button[role="switch"][aria-checked="false"]:hover
+) [class*="tooltip_"] div[data-text-variant="text-sm/medium"],
+body:has(
+    button[role="switch"][aria-checked="true"].redGlow__67645:hover
+) [class*="tooltip_"] div[data-text-variant="text-sm/medium"],
+body:has(
+    .buttons__37e49
+    > .audioButtonParent__5e764:nth-child(2)
+    > button[role="switch"][aria-checked="false"]:hover
+) [class*="tooltip_"] div[data-text-variant="text-sm/medium"] {
+    font-size: revert !important;
+    line-height: revert !important;
+    transition-delay: revert !important;
+    &::after {
+        content: none !important;
+    }
+}`
+  },
+
+  "typing-text": {
+    disable: `/* Typing indicator text: off */
+.f75fb00fb7356cbe-chat .b8880176888cc928-typingDots > .b8880176888cc928-ellipsis+.b8880176888cc928-text {
+    font-size: revert !important;
+    height: revert !important;
+    > strong {
+        font-size: revert !important;
+        &::after {
+            content: none !important;
+        }
+    }
+    &:not(:has(>strong))::after {
+        content: none !important;
+    }
+}`
+  }
+};
+
+const featureIds = Object.keys(features);
+const checkboxes = featureIds.map(id => document.getElementById(id));
+const styleSelects = featureIds
+  .filter(id => features[id].variants)
+  .map(id => document.getElementById(`${id}-style`));
+const output = document.getElementById("output");
+const copyBtn = document.getElementById("copy-btn");
+const copyBtnLabel = document.getElementById("copy-btn-label");
+
+const previewStyle = document.getElementById("preview-style");
+
+// Where the pre-baked, standalone combination sheets live (see custom/css/README.md).
+const COMBO_BASE_URL = "https://moshikiwi.github.io/MutedToMuzzledVencordPort/custom/css/";
+
+// Bit order/meaning matches custom/css/README.md exactly:
+// [mute-swap, mute-style, deafen-swap, deafen-style, tooltip, typing], 0 = matches default, 1 = overridden.
+function computeBits() {
+  const muteOn = document.getElementById("icon-mute").checked;
+  const muteOld = document.getElementById("icon-mute-style").value === "old";
+  const deafenOn = document.getElementById("icon-deafen").checked;
+  const deafenOld = document.getElementById("icon-deafen-style").value === "old";
+  const tooltipOn = document.getElementById("tooltip-text").checked;
+  const typingOn = document.getElementById("typing-text").checked;
+
+  return [
+    muteOn ? 0 : 1,
+    muteOld ? 1 : 0,
+    deafenOn ? 0 : 1,
+    deafenOld ? 1 : 0,
+    tooltipOn ? 0 : 1,
+    typingOn ? 0 : 1,
+  ];
+}
+
+function render() {
+  // Build the full import+overrides snippet purely to drive the live mock preview below
+  // (it only needs the already-hosted base stylesheet, so it works before anything new is pushed).
+  let previewSnippet = `@import url("${IMPORT_URL}");`;
+  for (const id of featureIds) {
+    const feature = features[id];
+    const box = document.getElementById(id);
+    if (!box.checked) {
+      previewSnippet += `\n\n${feature.disable}`;
+      continue;
+    }
+    if (feature.variants) {
+      const select = document.getElementById(`${id}-style`);
+      select.disabled = false;
+      const variant = feature.variants[select.value];
+      if (variant) previewSnippet += `\n\n${variant}`;
+    }
+  }
+  previewStyle.textContent = previewSnippet;
+
+  // What people actually copy: always a single @import, pointing at the matching
+  // pre-baked standalone sheet in custom/css/ (or the plain default file if nothing changed).
+  const bits = computeBits();
+  const isDefault = bits.every(b => b === 0);
+  const url = isDefault ? IMPORT_URL : `${COMBO_BASE_URL}MutedToMuzzled-${bits.join("-")}.css`;
+  output.textContent = `@import url("${url}");`;
+}
+
+function syncSelectState() {
+  for (const id of featureIds) {
+    const feature = features[id];
+    if (!feature.variants) continue;
+    document.getElementById(`${id}-style`).disabled = !document.getElementById(id).checked;
+  }
+}
+
+checkboxes.forEach(box => box.addEventListener("change", () => { syncSelectState(); render(); }));
+styleSelects.forEach(select => select.addEventListener("change", render));
+syncSelectState();
+
+copyBtn.addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(output.textContent);
+    copyBtnLabel.textContent = "Copied!";
+    copyBtn.classList.add("copied");
+    setTimeout(() => {
+      copyBtnLabel.textContent = "Copy";
+      copyBtn.classList.remove("copied");
+    }, 1500);
+  } catch (e) {
+    // clipboard API unavailable (e.g. insecure context) — select the text instead
+    const range = document.createRange();
+    range.selectNodeContents(output);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
+});
+
+render();
+</script>
+</body>
+</html>
