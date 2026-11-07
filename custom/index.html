@@ -538,7 +538,7 @@
                   </svg>
                 </div>
               </button>
-              <div class="tooltip__wxyz989"><div data-text-variant="text-sm/medium">Mute</div></div>
+              <div class="tooltip__wxyz989"><div data-text-variant="body-sm/medium">Mute</div></div>
             </div>
             <div class="audioButtonParent__5e764 btn-wrap">
               <button type="button" role="switch" aria-checked="false" aria-label="Deafen" class="discord-btn">
@@ -548,7 +548,7 @@
                   </svg>
                 </div>
               </button>
-              <div class="tooltip__wxyz989"><div data-text-variant="text-sm/medium">Deafen</div></div>
+              <div class="tooltip__wxyz989"><div data-text-variant="body-sm/medium">Deafen</div></div>
             </div>
           </div>
           <div class="state-sep"></div>
@@ -560,17 +560,17 @@
                 </svg>
               </div>
             </button>
-            <div class="tooltip__wxyz989"><div data-text-variant="text-sm/medium">Unmute</div></div>
+            <div class="tooltip__wxyz989"><div data-text-variant="body-sm/medium">Unmute</div></div>
           </div>
-          <div class="btn-wrap">
-            <button type="button" role="switch" aria-checked="true" aria-label="Undeafen" class="discord-btn redGlow__67645">
+          <div class="audioButtonParent__s2 btn-wrap">
+            <button type="button" role="switch" aria-checked="true" aria-label="Undeafen" class="discord-btn">
               <div class="lottieIcon__jkl012">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
                 </svg>
               </div>
             </button>
-            <div class="tooltip__wxyz989"><div data-text-variant="text-sm/medium">Undeafen</div></div>
+            <div class="tooltip__wxyz989"><div data-text-variant="body-sm/medium">Undeafen</div></div>
           </div>
         </div>
       </div>
@@ -634,42 +634,34 @@ const features = {
 
   "icon-deafen": {
     disable: `/* Deafen icon swap: off */
-button[role="switch"].redGlow__67645[aria-checked="true"] {
+[class*="audioButtonParent_"] ~ [class*="audioButtonParent_"] > button[role="switch"] {
     [class*="lottieIcon_"] > svg {
         display: revert !important;
     }
-    [class*="lottieIcon_"]::after {
-        content: none !important;
-        display: none !important;
-    }
-}
-
-.buttons__37e49 > .audioButtonParent__5e764:nth-child(2) > button[role="switch"][aria-checked="false"] {
-    [class*="lottieIcon_"] > svg {
-        display: revert !important;
-    }
-    [class*="lottieIcon_"]::after {
+    &[aria-checked="true"] [class*="lottieIcon_"]::after,
+    &[aria-checked="false"] [class*="lottieIcon_"]::after {
         content: none !important;
         display: none !important;
     }
 }`,
     variants: {
       old: `/* Deafen icon swap: old art style */
-button[role="switch"].redGlow__67645[aria-checked="true"] [class*="lottieIcon_"]::after {
-    background: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/closed.png")
-        center / contain no-repeat;
-}
-
-.buttons__37e49 > .audioButtonParent__5e764:nth-child(2) > button[role="switch"][aria-checked="false"] [class*="lottieIcon_"]::after {
-    background: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/open.png")
-        center / contain no-repeat;
+[class*="audioButtonParent_"] ~ [class*="audioButtonParent_"] > button[role="switch"] {
+    &[aria-checked="true"] [class*="lottieIcon_"]::after {
+        background: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/closed.png")
+            center / contain no-repeat;
+    }
+    &[aria-checked="false"] [class*="lottieIcon_"]::after {
+        background: url("https://raw.githubusercontent.com/zoez22/muzzlemute/refs/heads/main/open.png")
+            center / contain no-repeat;
+    }
 }`
     }
   },
 
   "tooltip-text": {
     disable: `/* Custom tooltip text: off */
-[class*="tooltip_"] div[data-text-variant="text-sm/medium"] {
+[class*="tooltip_"] div[data-text-variant="body-sm/medium"] {
     transition: revert !important;
 }
 
@@ -677,20 +669,20 @@ body:has(
     [class*="audioButtonParent_"]:not(
         [class*="audioButtonParent_"] ~ *
     ) > button[role="switch"][aria-checked="true"]:hover
-) [class*="tooltip_"] div[data-text-variant="text-sm/medium"],
+) [class*="tooltip_"] div[data-text-variant="body-sm/medium"],
 body:has(
     [class*="audioButtonParent_"]:not(
         [class*="audioButtonParent_"] ~ *
     ) > button[role="switch"][aria-checked="false"]:hover
-) [class*="tooltip_"] div[data-text-variant="text-sm/medium"],
+) [class*="tooltip_"] div[data-text-variant="body-sm/medium"],
 body:has(
-    button[role="switch"][aria-checked="true"].redGlow__67645:hover
-) [class*="tooltip_"] div[data-text-variant="text-sm/medium"],
+    [class*="audioButtonParent_"] ~ [class*="audioButtonParent_"]
+    > button[role="switch"][aria-checked="true"]:hover
+) [class*="tooltip_"] div[data-text-variant="body-sm/medium"],
 body:has(
-    .buttons__37e49
-    > .audioButtonParent__5e764:nth-child(2)
+    [class*="audioButtonParent_"] ~ [class*="audioButtonParent_"]
     > button[role="switch"][aria-checked="false"]:hover
-) [class*="tooltip_"] div[data-text-variant="text-sm/medium"] {
+) [class*="tooltip_"] div[data-text-variant="body-sm/medium"] {
     font-size: revert !important;
     line-height: revert !important;
     transition-delay: revert !important;

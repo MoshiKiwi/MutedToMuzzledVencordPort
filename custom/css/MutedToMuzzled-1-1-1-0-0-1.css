@@ -5,7 +5,7 @@
  */
 
 [class*="tooltip_"] {
-    div[data-text-variant="text-sm/medium"] {
+    div[data-text-variant="body-sm/medium"] {
         transition: font-size 0s;
         transition-delay: 180ms;
     }
@@ -16,7 +16,7 @@ body:has(
         [class*="audioButtonParent_"] ~ *
     ) > button[role="switch"][aria-checked="true"]:hover
 ) {
-    [class*="tooltip_"] div[data-text-variant="text-sm/medium"] {
+    [class*="tooltip_"] div[data-text-variant="body-sm/medium"] {
         font-size: 0 !important;
         line-height: 18px !important;
         transition-delay: 0s;
@@ -30,9 +30,10 @@ body:has(
 }
 
 body:has(
-    button[role="switch"][aria-checked="true"].redGlow__67645:hover
+    [class*="audioButtonParent_"] ~ [class*="audioButtonParent_"]
+    > button[role="switch"][aria-checked="true"]:hover
 ) {
-    [class*="tooltip_"] div[data-text-variant="text-sm/medium"] {
+    [class*="tooltip_"] div[data-text-variant="body-sm/medium"] {
         font-size: 0 !important;
         line-height: 18px !important;
         transition-delay: 0s;
@@ -50,7 +51,7 @@ body:has(
         [class*="audioButtonParent_"] ~ *
     ) > button[role="switch"][aria-checked="false"]:hover
 ) {
-    [class*="tooltip_"] div[data-text-variant="text-sm/medium"] {
+    [class*="tooltip_"] div[data-text-variant="body-sm/medium"] {
         font-size: 0 !important;
         line-height: 18px !important;
         transition-delay: 0s;
@@ -64,11 +65,10 @@ body:has(
 }
 
 body:has(
-    .buttons__37e49
-    > .audioButtonParent__5e764:nth-child(2)
+    [class*="audioButtonParent_"] ~ [class*="audioButtonParent_"]
     > button[role="switch"][aria-checked="false"]:hover
 ) {
-    [class*="tooltip_"] div[data-text-variant="text-sm/medium"] {
+    [class*="tooltip_"] div[data-text-variant="body-sm/medium"] {
         font-size: 0 !important;
         line-height: 18px !important;
         transition-delay: 0s;

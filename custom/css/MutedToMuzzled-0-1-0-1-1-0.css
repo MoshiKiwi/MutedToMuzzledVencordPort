@@ -36,7 +36,7 @@
     }
 }
 
-button[role="switch"].redGlow__67645 {
+[class*="audioButtonParent_"] ~ [class*="audioButtonParent_"] > button[role="switch"] {
     &[aria-checked="true"] {
         [class*="lottieIcon_"] > svg {
             display: none;
@@ -53,8 +53,7 @@ button[role="switch"].redGlow__67645 {
     }
 }
 
-.buttons__37e49
-> .audioButtonParent__5e764:nth-child(2)
+[class*="audioButtonParent_"] ~ [class*="audioButtonParent_"]
 > button[role="switch"][aria-checked="false"] {
     [class*="lottieIcon_"] > svg {
         display: none;
