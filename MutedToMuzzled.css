@@ -146,7 +146,7 @@ body:has(
     }
 }
 
-.f75fb00fb7356cbe-chat .b8880176888cc928-typingDots > .b8880176888cc928-ellipsis+.b8880176888cc928-text {
+.typing_b88801 .typingDots_b88801 > .text_b88801 {
   font-size: 0;
   height: 16px;
   >strong {
@@ -162,7 +162,7 @@ body:has(
       content: " are barking!!!";
     }
     &:nth-last-child(2)::after {
-      content: " and "
+      content: " and ";
     }
     &:nth-last-child(3)::after {
       content: ", ";
